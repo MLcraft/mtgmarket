@@ -1,11 +1,13 @@
 package com.shizubro.mtgmarket.service;
 
+import com.shizubro.mtgmarket.config.ExternalAPIConfig;
 import com.shizubro.mtgmarket.model.ListingDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -16,8 +18,9 @@ import java.util.Set;
 @Slf4j
 @Component("storeScraperService")
 public class StoreScraperService {
-    private static final String SERRA_URL = "https://cardshop-serra.com";
-    private static final String HARERUYA_URL = "https://www.hareruyamtg.com";
+
+    @Autowired
+    ExternalAPIConfig apiConfig;
 
     // get card price aggregates from all sites
     public Set<ListingDTO> getCardPriceByName(String cardName) {
@@ -32,7 +35,7 @@ public class StoreScraperService {
 
     // get card price aggregates from hareruya
     public Set<ListingDTO> getHareruyaPrice(String cardName) throws IOException {
-        return this.getHareruyaListingsFromUrl(this.HARERUYA_URL + "/ja/products/search?product=" + cardName);
+        return this.getHareruyaListingsFromUrl(apiConfig.getHareruya() + "/ja/products/search?product=" + cardName);
 
     }
 
@@ -62,7 +65,7 @@ public class StoreScraperService {
     }
 
     private Set<ListingDTO> getSerraListingsFromUrl(String fetchUrl) throws IOException {
-        Document doc = Jsoup.connect(String.format(this.SERRA_URL + fetchUrl)).get();
+        Document doc = Jsoup.connect(String.format(apiConfig.getSerra() + fetchUrl)).get();
         Elements listingResults = doc.select("div.product-list__item");
         log.info(String.valueOf(listingResults.size()));
         for (Element listing : listingResults) {

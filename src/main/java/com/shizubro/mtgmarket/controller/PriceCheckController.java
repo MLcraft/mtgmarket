@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit;
 @RequestMapping(path = "/")
 public class PriceCheckController {
     @Autowired
-    MockPriceSearchService priceSearchService;
-//    PriceSearchService priceSearchService;
+//    MockPriceSearchService priceSearchService;
+    PriceSearchService priceSearchService;
 
     @Autowired
     ScryfallService scryfallService;

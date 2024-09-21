@@ -16,7 +16,6 @@ public class MockPriceSearchService {
         Set<ListingDTO> resultSet = new HashSet<ListingDTO>();
         ListingDTO mockListing1 = ListingDTO.builder()
                 .source(CARDSHOP.SERRA)
-                .cardName(cardName)
                 .lang(CARDLANG.EN)
                 .isFoil(false)
                 .listingUrl("listingUrl1")
@@ -27,7 +26,6 @@ public class MockPriceSearchService {
 
         ListingDTO mockListing2 = ListingDTO.builder()
                 .source(CARDSHOP.HARERUYA)
-                .cardName(cardName)
                 .lang(CARDLANG.JP)
                 .isFoil(true)
                 .listingUrl("listingUrl2")

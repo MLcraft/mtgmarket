@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: mtgmarket
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+    jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+  h2:
+    console.enabled: true
+  sql:
+    init:
+      schema-locations: classpath:create_order_table.sql
+
+external:
+  serra: https://cardshop-serra.com
+  hareruya: https://www.hareruyamtg.com
+  scryfall:

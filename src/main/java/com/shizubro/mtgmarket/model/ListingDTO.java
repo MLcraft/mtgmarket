@@ -11,12 +11,15 @@ import java.math.BigInteger;
 @Data
 @Builder
 public class ListingDTO {
+    private Integer id;
     // source
     private CARDSHOP source;
-    // card name
-    private String cardName;
     // card language
     private CARDLANG lang;
+    // set code
+    private String setCode;
+    // card number
+    private Integer cardNumber;
     // foiling
     private boolean isFoil;
     // listing_url
