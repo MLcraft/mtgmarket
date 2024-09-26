@@ -10,11 +10,15 @@ spring:
       database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console.enabled: true
-  sql:
-    init:
-      schema-locations: classpath:create_order_table.sql
+#  jpa:
+#    hibernate:
+#      ddl-auto: validate
+#    properties:
+#      hibernate:
+#        format-sql: true
+#    show-sql: true
 
 external:
   serra: https://cardshop-serra.com
   hareruya: https://www.hareruyamtg.com
-  scryfall:
+  scryfall: https://api.scryfall.com

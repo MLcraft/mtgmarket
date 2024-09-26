@@ -1,6 +1,6 @@
 package com.shizubro.mtgmarket.service;
 
-import com.shizubro.mtgmarket.model.ListingDTO;
+import com.shizubro.mtgmarket.model.Listing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +15,7 @@ public class PriceSearchService {
     @Autowired
     StoreScraperService storeScraperService;
 
-    public Set<ListingDTO> getCardPriceByFilters(String cardName) {
+    public Set<Listing> getCardPriceByFilters(String cardName) {
         return storeScraperService.getCardPriceByName(cardName);
     }
 }

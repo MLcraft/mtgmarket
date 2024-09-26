@@ -1,7 +1,7 @@
 package com.shizubro.mtgmarket.service;
 
 import com.shizubro.mtgmarket.config.ExternalAPIConfig;
-import com.shizubro.mtgmarket.model.ListingDTO;
+import com.shizubro.mtgmarket.model.Listing;
 import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,7 +23,7 @@ public class StoreScraperService {
     ExternalAPIConfig apiConfig;
 
     // get card price aggregates from all sites
-    public Set<ListingDTO> getCardPriceByName(String cardName) {
+    public Set<Listing> getCardPriceByName(String cardName) {
         try {
 //            getSerraPrice(cardName);
             getHareruyaPrice(cardName);
@@ -34,12 +34,12 @@ public class StoreScraperService {
     }
 
     // get card price aggregates from hareruya
-    public Set<ListingDTO> getHareruyaPrice(String cardName) throws IOException {
+    public Set<Listing> getHareruyaPrice(String cardName) throws IOException {
         return this.getHareruyaListingsFromUrl(apiConfig.getHareruya() + "/ja/products/search?product=" + cardName);
 
     }
 
-    private Set<ListingDTO> getHareruyaListingsFromUrl(String fetchUrl) throws IOException {
+    private Set<Listing> getHareruyaListingsFromUrl(String fetchUrl) throws IOException {
         Document doc = Jsoup.connect(String.format(fetchUrl)).get();
         Elements listingResults = doc.select("ul.itemListLine");
         log.info(String.valueOf(listingResults.first()));
@@ -60,11 +60,11 @@ public class StoreScraperService {
     }
 
     // get card price aggregates from cardshop serra
-    public Set<ListingDTO> getSerraPrice(String cardName) throws IOException {
+    public Set<Listing> getSerraPrice(String cardName) throws IOException {
         return this.getSerraListingsFromUrl("/mtg/products/list?name=" + cardName);
     }
 
-    private Set<ListingDTO> getSerraListingsFromUrl(String fetchUrl) throws IOException {
+    private Set<Listing> getSerraListingsFromUrl(String fetchUrl) throws IOException {
         Document doc = Jsoup.connect(String.format(apiConfig.getSerra() + fetchUrl)).get();
         Elements listingResults = doc.select("div.product-list__item");
         log.info(String.valueOf(listingResults.size()));

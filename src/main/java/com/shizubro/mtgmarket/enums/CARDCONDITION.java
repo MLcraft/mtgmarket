@@ -1,4 +1,4 @@
-package com.shizubro.mtgmarket.model.enums;
+package com.shizubro.mtgmarket.enums;
 
 public enum CARDCONDITION {
     NM,
