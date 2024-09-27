@@ -1,8 +1,9 @@
 package com.shizubro.mtgmarket.repository;
 
+import com.shizubro.mtgmarket.model.Listing;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ListingRepository extends JpaRepository {
+public interface ListingRepository extends JpaRepository<Listing, Long> {
 }

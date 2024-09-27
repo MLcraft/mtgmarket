@@ -14,12 +14,12 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "listings")
+@Table(name = "listing")
 public class Listing {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne()
     @JoinColumn(name="card_id", nullable=false)

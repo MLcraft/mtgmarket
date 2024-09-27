@@ -17,6 +17,9 @@ spring:
 #      hibernate:
 #        format-sql: true
 #    show-sql: true
+  sql:
+    init:
+      schema-locations: classpath:migrations/create_card_table.sql, classpath:migrations/create_listing_table.sql
 
 external:
   serra: https://cardshop-serra.com

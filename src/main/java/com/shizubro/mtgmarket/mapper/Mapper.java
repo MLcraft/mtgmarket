@@ -5,19 +5,15 @@ import com.shizubro.mtgmarket.dto.ListingDto;
 import com.shizubro.mtgmarket.enums.CARDCONDITION;
 import com.shizubro.mtgmarket.enums.CARDLANG;
 import com.shizubro.mtgmarket.enums.CARDSHOP;
+import com.shizubro.mtgmarket.model.Card;
 import com.shizubro.mtgmarket.model.Listing;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
+import java.util.UUID;
 
-@Component
-public class ListingMapper {
-    @Autowired
-    private CardMapper cardMapper;
-
-    public ListingDto toDto(Listing listing) {
-        CardDto cardDto = cardMapper.toDto(listing.getCard());
+public class Mapper {
+    public ListingDto listingToDto(Listing listing) {
+        CardDto cardDto = this.cardToDto(listing.getCard());
         CARDSHOP source = listing.getSource();
         CARDLANG lang = listing.getLang();
         String setCode = listing.getSetCode();
@@ -30,9 +26,22 @@ public class ListingMapper {
         return new ListingDto(cardDto, source, lang, setCode, cardNumber, isFoil, listingUrl, price, condition, cardImageUrl);
     }
 
-    public Listing toEntity(ListingDto listingDto) {
+    public Listing listingToEntity(ListingDto listingDto) {
         Listing listing = new Listing();
-        listing.setCard(cardMapper.toEntity(listingDto.getCard()));
+        listing.setCard(this.cardToEntity(listingDto.getCard()));
         return listing;
+    }
+
+    public CardDto cardToDto(Card card) {
+        String cardName = card.getCardName();
+        UUID oracleId = card.getOracleId();
+        return new CardDto(oracleId, cardName);
+    }
+
+    public Card cardToEntity(CardDto cardDto) {
+        Card card = new Card();
+        card.setCardName(cardDto.getCardName());
+        card.setOracleId(cardDto.getOracleId());
+        return card;
     }
 }

@@ -13,7 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "cards")
+@Table(name = "card")
 public class Card {
     @Id
     private UUID oracleId;
