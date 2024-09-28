@@ -1,6 +1,6 @@
 package com.shizubro.mtgmarket.enums;
 
-public enum CARDCONDITION {
+public enum CardCondition {
     NM,
     SP,
     MP,

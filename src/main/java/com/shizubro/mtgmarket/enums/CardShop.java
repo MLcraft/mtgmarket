@@ -1,6 +1,6 @@
 package com.shizubro.mtgmarket.enums;
 
-public enum CARDSHOP {
+public enum CardShop {
     SERRA,
     HARERUYA
 }

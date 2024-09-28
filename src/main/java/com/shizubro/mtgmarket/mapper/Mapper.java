@@ -2,9 +2,9 @@ package com.shizubro.mtgmarket.mapper;
 
 import com.shizubro.mtgmarket.dto.CardDto;
 import com.shizubro.mtgmarket.dto.ListingDto;
-import com.shizubro.mtgmarket.enums.CARDCONDITION;
-import com.shizubro.mtgmarket.enums.CARDLANG;
-import com.shizubro.mtgmarket.enums.CARDSHOP;
+import com.shizubro.mtgmarket.enums.CardCondition;
+import com.shizubro.mtgmarket.enums.CardLang;
+import com.shizubro.mtgmarket.enums.CardShop;
 import com.shizubro.mtgmarket.model.Card;
 import com.shizubro.mtgmarket.model.Listing;
 
@@ -14,14 +14,14 @@ import java.util.UUID;
 public class Mapper {
     public ListingDto listingToDto(Listing listing) {
         CardDto cardDto = this.cardToDto(listing.getCard());
-        CARDSHOP source = listing.getSource();
-        CARDLANG lang = listing.getLang();
+        CardShop source = listing.getSource();
+        CardLang lang = listing.getLang();
         String setCode = listing.getSetCode();
         String cardNumber = listing.getCardNumber();
         boolean isFoil = listing.isFoil();
         String listingUrl = listing.getListingUrl();
         BigInteger price = listing.getPrice();
-        CARDCONDITION condition = listing.getCondition();
+        CardCondition condition = listing.getCondition();
         String cardImageUrl = listing.getCardImageUrl();
         return new ListingDto(cardDto, source, lang, setCode, cardNumber, isFoil, listingUrl, price, condition, cardImageUrl);
     }

@@ -1,8 +1,8 @@
 package com.shizubro.mtgmarket.dto;
 
-import com.shizubro.mtgmarket.enums.CARDCONDITION;
-import com.shizubro.mtgmarket.enums.CARDLANG;
-import com.shizubro.mtgmarket.enums.CARDSHOP;
+import com.shizubro.mtgmarket.enums.CardCondition;
+import com.shizubro.mtgmarket.enums.CardLang;
+import com.shizubro.mtgmarket.enums.CardShop;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,13 +14,13 @@ import java.math.BigInteger;
 @AllArgsConstructor
 public class ListingDto {
     private CardDto card;
-    private CARDSHOP source;
-    private CARDLANG lang;
+    private CardShop source;
+    private CardLang lang;
     private String setCode;
     private String cardNumber;
     private boolean isFoil;
     private String listingUrl;
     private BigInteger price;
-    private CARDCONDITION condition;
+    private CardCondition condition;
     private String cardImageUrl;
 }

@@ -1,8 +1,8 @@
 package com.shizubro.mtgmarket.model;
 
-import com.shizubro.mtgmarket.enums.CARDCONDITION;
-import com.shizubro.mtgmarket.enums.CARDLANG;
-import com.shizubro.mtgmarket.enums.CARDSHOP;
+import com.shizubro.mtgmarket.enums.CardCondition;
+import com.shizubro.mtgmarket.enums.CardLang;
+import com.shizubro.mtgmarket.enums.CardShop;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -28,12 +28,12 @@ public class Listing {
     // source
     @Enumerated(EnumType.STRING)
     @Column(name = "source", nullable = false)
-    private CARDSHOP source;
+    private CardShop source;
 
     // card language
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "lang", nullable = false)
-    private CARDLANG lang;
+    private CardLang lang;
 
     // set code
     @Column(name = "set_code", nullable = false)
@@ -58,7 +58,7 @@ public class Listing {
     // condition
     @Enumerated(EnumType.STRING)
     @Column(name = "condition", nullable = false)
-    private CARDCONDITION condition;
+    private CardCondition condition;
 
     // card image url
     @Column(name = "image_url", nullable = false)
