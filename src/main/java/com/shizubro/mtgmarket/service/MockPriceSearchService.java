@@ -35,19 +35,20 @@ public class MockPriceSearchService {
         Listing testListing = new Listing();
         testListing.setCard(testCard);
         testListing.setId(1l);
-        testListing.setSource(CardShop.SERRA);
+        testListing.setSource(CardShop.HARERUYA);
         testListing.setLang(CardLang.EN);
         testListing.setSetCode("TSC");
         testListing.setCardNumber("001A");
         testListing.setFoil(false);
-        testListing.setListingUrl("listing.url");
+        testListing.setListingUrl("https://www.hareruyamtg.com/ja/products/detail/157898?lang=EN");
         testListing.setPrice(BigInteger.valueOf(10000));
         testListing.setCondition(CardCondition.SP);
-        testListing.setCardImageUrl("cardimage.url");
+        testListing.setCardImageUrl("https://cards.scryfall.io/png/front/5/4/5447a777-769d-4773-ab64-31c67e310e15.png");
         testListing.setUpdatedAt(Instant.parse("2024-11-30T18:35:24.00Z"));
         testListing.setCreatedAt(Instant.parse("2024-09-23T12:13:42.00Z"));
 
         this.listingRepository.save(testListing);
+        resultSet.add(testListing);
         return resultSet;
     }
 }
