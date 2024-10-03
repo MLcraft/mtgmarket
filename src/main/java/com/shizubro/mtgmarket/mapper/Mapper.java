@@ -7,10 +7,12 @@ import com.shizubro.mtgmarket.enums.CardLang;
 import com.shizubro.mtgmarket.enums.CardShop;
 import com.shizubro.mtgmarket.model.Card;
 import com.shizubro.mtgmarket.model.Listing;
+import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 import java.util.UUID;
 
+@Component
 public class Mapper {
     public ListingDto listingToDto(Listing listing) {
         CardDto cardDto = this.cardToDto(listing.getCard());

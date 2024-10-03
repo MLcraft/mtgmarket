@@ -18,28 +18,31 @@ import java.util.Set;
 @Slf4j
 @Component("storeScraperService")
 public class StoreScraperService {
+    private final ExternalAPIConfig apiConfig;
 
     @Autowired
-    ExternalAPIConfig apiConfig;
+    public StoreScraperService(ExternalAPIConfig apiConfig) {
+        this.apiConfig = apiConfig;
+    }
 
     // get card price aggregates from all sites
-    public Set<Listing> getCardPriceByName(String cardName) {
+    public List<Listing> getCardPriceByName(String cardName) {
         try {
 //            getSerraPrice(cardName);
             getHareruyaPrice(cardName);
         } catch (IOException exception) {
             log.error(exception.getMessage());
         }
-        return Set.of();
+        return new ArrayList<>();
     }
 
     // get card price aggregates from hareruya
-    public Set<Listing> getHareruyaPrice(String cardName) throws IOException {
+    public List<Listing> getHareruyaPrice(String cardName) throws IOException {
         return this.getHareruyaListingsFromUrl(apiConfig.getHareruya() + "/ja/products/search?product=" + cardName);
 
     }
 
-    private Set<Listing> getHareruyaListingsFromUrl(String fetchUrl) throws IOException {
+    private List<Listing> getHareruyaListingsFromUrl(String fetchUrl) throws IOException {
         Document doc = Jsoup.connect(String.format(fetchUrl)).get();
         Elements listingResults = doc.select("ul.itemListLine");
         log.info(String.valueOf(listingResults.first()));
@@ -56,15 +59,15 @@ public class StoreScraperService {
         if (nextPageUrl != "") {
             getHareruyaListingsFromUrl(nextPageUrl);
         }
-        return Set.of();
+        return new ArrayList<>();
     }
 
     // get card price aggregates from cardshop serra
-    public Set<Listing> getSerraPrice(String cardName) throws IOException {
+    public List<Listing> getSerraPrice(String cardName) throws IOException {
         return this.getSerraListingsFromUrl("/mtg/products/list?name=" + cardName);
     }
 
-    private Set<Listing> getSerraListingsFromUrl(String fetchUrl) throws IOException {
+    private List<Listing> getSerraListingsFromUrl(String fetchUrl) throws IOException {
         Document doc = Jsoup.connect(String.format(apiConfig.getSerra() + fetchUrl)).get();
         Elements listingResults = doc.select("div.product-list__item");
         log.info(String.valueOf(listingResults.size()));
@@ -95,6 +98,6 @@ public class StoreScraperService {
             log.info(String.valueOf(nextPageUrl));
             this.getSerraListingsFromUrl(nextPageUrl.replaceAll("%20", "+"));
         }
-        return Set.of();
+        return new ArrayList<>();
     }
 }
