@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react'
 import './App.css';
 
 import { SearchBar } from "./components/SearchBar";
+import {CardListing} from "./components/CardListing";
 
 const App = () => {
   const [showResultText, setShowResultText] = useState(false);
@@ -23,12 +23,7 @@ const App = () => {
           <SearchBar setResults={setResults} setSearchQuery={setSearchQuery} setShowResultText={setShowResultText}/>
           {showResultText && <h2>List of products for card with name {searchQuery}</h2>}
           {results.map(result =>
-            <div>
-                {result.source}
-                {result.cardName}
-                {result.cardImageUrl}
-                <a href={result.listingUrl}><img class="listing-card-image" src={result.cardImageUrl} alt={result.cardName} /></a>
-            </div>
+            <CardListing listing={result}></CardListing>
           )}
         </div>
       </header>

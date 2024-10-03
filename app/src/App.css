@@ -36,7 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.listing-card-image:hover {
-    filter: brightness(50%);
-}
