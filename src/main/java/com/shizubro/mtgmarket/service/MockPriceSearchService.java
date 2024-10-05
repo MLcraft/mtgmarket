@@ -35,7 +35,7 @@ public class MockPriceSearchService {
 
     public List<ListingDto> getCardPriceByFilters(String cardName) {
         List<ListingDto> resultSet = new ArrayList<>();
-        String testCardName = "Test Card Name";
+        String testCardName = cardName;
 
         if (cardCacheRepository.existsByName(testCardName)) {
             CardCache cachedCard = this.cardCacheRepository.findByName(testCardName);
@@ -49,7 +49,7 @@ public class MockPriceSearchService {
             testCard.setCardName(testCardName);
             this.cardRepository.save(testCard);
             CardCache cachedCard = new CardCache();
-            cachedCard.setName("Test Card Name");
+            cachedCard.setName(cardName);
             cachedCard.setOracleId(cardOracleId);
 
             this.cardCacheRepository.save(cachedCard);
@@ -75,6 +75,7 @@ public class MockPriceSearchService {
             testListing.setSource(CardShop.SERRA);
             testListing.setLang(CardLang.JP);
             testListing.setPrice(BigInteger.valueOf(23424));
+            this.listingRepository.save(testListing);
             resultSet.add(this.mapper.listingToDto(testListing));
         }
         return resultSet;
