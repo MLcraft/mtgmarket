@@ -2,11 +2,13 @@ package com.shizubro.mtgmarket.mapper;
 
 import com.shizubro.mtgmarket.dto.CardDto;
 import com.shizubro.mtgmarket.dto.ListingDto;
+import com.shizubro.mtgmarket.dto.ScryfallCardDataDto;
 import com.shizubro.mtgmarket.enums.CardCondition;
 import com.shizubro.mtgmarket.enums.CardLang;
 import com.shizubro.mtgmarket.enums.CardShop;
 import com.shizubro.mtgmarket.model.Card;
 import com.shizubro.mtgmarket.model.Listing;
+import com.shizubro.mtgmarket.model.ScryfallCardData;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
@@ -44,6 +46,21 @@ public class Mapper {
         Card card = new Card();
         card.setCardName(cardDto.getCardName());
         card.setOracleId(cardDto.getOracleId());
+        return card;
+    }
+
+    public ScryfallCardDataDto scryfallDataToDto(ScryfallCardData card) {
+        String cardName = card.getCardName();
+        String cardImageUrl = card.getCardImageUrl();
+        UUID id = card.getId();
+        return new ScryfallCardDataDto();
+    }
+
+    public ScryfallCardData scryfallDataToEntity(ScryfallCardDataDto cardDto) {
+        ScryfallCardData card = new ScryfallCardData();
+        card.setCardName(cardDto.getCardName());
+        card.setId(cardDto.getId());
+        card.setCardImageUrl(cardDto.getCardImageUrl());
         return card;
     }
 }

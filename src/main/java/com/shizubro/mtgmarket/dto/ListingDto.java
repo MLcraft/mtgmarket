@@ -3,16 +3,20 @@ package com.shizubro.mtgmarket.dto;
 import com.shizubro.mtgmarket.enums.CardCondition;
 import com.shizubro.mtgmarket.enums.CardLang;
 import com.shizubro.mtgmarket.enums.CardShop;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 
-@Getter
-@Setter
+/**
+ * DTO for {@link com.shizubro.mtgmarket.model.Listing}
+ */
+@Data
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
-public class ListingDto {
+@NoArgsConstructor
+public class ListingDto implements Serializable {
     private CardDto card;
     private CardShop source;
     private CardLang lang;

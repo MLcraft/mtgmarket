@@ -1,19 +1,19 @@
 package com.shizubro.mtgmarket.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Set;
+import java.io.Serializable;
 import java.util.UUID;
 
-@Getter
-@Setter
+/**
+ * DTO for {@link com.shizubro.mtgmarket.model.Card}
+ */
+@Data
+@ToString
+@EqualsAndHashCode
 @AllArgsConstructor
-public class CardDto {
-    @JsonProperty("oracle_id")
+@NoArgsConstructor
+public class CardDto implements Serializable {
     private UUID oracleId;
-    @JsonProperty("name")
     private String cardName;
 }

@@ -14,8 +14,8 @@ spring:
     hikari:
       max-lifetime: 600000
   jpa:
-#    hibernate:
-#      ddl-auto: create
+    hibernate:
+      ddl-auto: create
     properties:
       hibernate:
         boot:
@@ -36,9 +36,45 @@ spring:
       port: 6379
   sql:
     init:
-      schema-locations: classpath:migrations/create_card_table.sql, classpath:migrations/create_listing_table.sql
+      schema-locations: classpath:migrations/create_card_table.sql, classpath:migrations/create_listing_table.sql, classpath:migrations/create_scryfall_card_table.sql
 
 external:
   serra: https://cardshop-serra.com
   hareruya: https://www.hareruyamtg.com
   scryfall: https://api.scryfall.com
+
+---
+spring:
+  cloud:
+    function:
+      definition: "scryfallCardDataMessage"
+---
+spring:
+  cloud:
+    stream:
+      function:
+        bindings:
+          scryfallCardDataMessage-in-0: scryfall-card-data-message
+      rabbit:
+        bindings:
+          scryfall-card-data-message:
+            consumer:
+              auto-bind-dlq: true
+              republish-to-dlq: true
+      binders:
+        local-rabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: rabbitadmin
+                password: rabbitpassword
+                virtual-host: mtgmarket_broker
+      bindings:
+        scryfall-card-data-message:
+          binder: local-rabbit
+          content-type: application/json
+          destination: scryfall-card-data-message-exchange
+          group: scryfall-card-data-message-queue
